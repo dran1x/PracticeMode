@@ -1,0 +1,29 @@
+"Phrases"
+{
+    "User Settings"
+    {
+        "en"                "User Settings"
+    }
+
+    "User Setting ON"
+    {
+        "en"                "[ON]"
+    }
+
+    "User Setting OFF"
+    {
+        "en"                "[OFF]"
+    }
+
+    // UserSetting_DrawGrenadeTrajectories
+    "User Setting[0]"
+    {
+        "en"                "Trajectory Trails"
+    }
+
+    // UserSetting_RestrictMobilityNade
+    "User Setting[1]"
+    {
+        "en"                "Restrict Mobility Nade"
+    }
+}

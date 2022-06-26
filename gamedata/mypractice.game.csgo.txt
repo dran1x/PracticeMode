@@ -1,0 +1,15 @@
+"Games"
+{
+    "csgo"
+    {
+        "Offsets"
+        {
+            "Platform"
+            {
+                "linux"		"1"     // Linux Server OS
+                "windows"	"0"     // Windows Server OS
+                "mac"       "2"     // Mac Server OS
+            }
+        }
+    }
+}
