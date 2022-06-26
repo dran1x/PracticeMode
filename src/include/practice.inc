@@ -5,6 +5,7 @@
 
 #define TAG_CHAT "[\x06Practice\x01]"
 #define TAG_CONSOLE "[{GREEN}Practice{DEFAULT}]"
+#define TAG_CONSOLE_NCLR "[Practice]"
 #define TAG_MENU "Practice | "
 #define TAG_PLUG "[MP] "
 
@@ -29,7 +30,7 @@ stock const char szGrenadeTypes[][] =
     "Molotov",
     "Decoy",
     "Incendiary"
-}
+};
 
 /**
  * Called when practice core is fully functional.

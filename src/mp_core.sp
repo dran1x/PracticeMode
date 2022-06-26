@@ -35,8 +35,6 @@ public void OnPluginStart()
 	Core.cvRandomGrenadeTrajectoryColors = CreateConVar("sm_practice_random_grenadecolors", "1", "Should grenade trails have random colors", FCVAR_PROTECTED);
 
 	RegConsoleCmd("sm_psettings", Command_Settings);
-
-	OnMapStart();
 }
 
 public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLength)
@@ -63,6 +61,9 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 
 public Action Command_Settings(int iClient, int iArgs)
 {
+	if (iClient <= 0)
+		return Plugin_Handled;
+	
 	DisplaySettingsMenu(iClient);
 	return Plugin_Handled;
 }
@@ -125,13 +126,13 @@ public void OnMapStart()
 
 public void OnMapEnd()
 {
-	if (Core.bPracticeModeRunning)
+	if (Core.bPracticeModeRunning && !Core.bPracticeModeRunning)
 		Core.Stop();
 }
 
 public void OnClientPutInServer(int iClient)
 {
-    if (iClient > 0 && !IsFakeClient(iClient))
+    if (!IsFakeClient(iClient))
         g_EPlayer[iClient].Init(iClient);
 }
 

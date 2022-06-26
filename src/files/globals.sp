@@ -37,6 +37,10 @@ enum struct Global
     void Initiate()
     {
         GameData hGameData = new GameData("practice.game.csgo");
+
+        if (hGameData == null)
+            SetFailState("%s Unable to get \"practice.game.csgo.txt\" gamedata", TAG_CONSOLE_NCLR);
+
         this.ServerOS = view_as<OperatingSystem>(hGameData.GetOffset("Platform"));
         delete hGameData;
 
@@ -125,18 +129,3 @@ enum struct EPlayer
 }
 
 EPlayer g_EPlayer[MAXPLAYERS + 1];
-
-// weapon_8
-// weapon_m
-// stock bool IsWeaponNade(const char[] szWeapon)
-// {
-// 	return (szWeapon[7] == 'i'    // inferno + incgrenade
-// 	        || szWeapon[11] == 'r'    // taser (zeus)
-// 	        || szWeapon[11] == 'y'    // decoy
-// 	        || (szWeapon[7] == 'h' && szWeapon[8] == 'e')    // hegrenade + healthshot
-// 	        || (szWeapon[7] == 'f' && szWeapon[8] == 'l')    // flashbang
-// 	        || (szWeapon[7] == 'm' && szWeapon[8] == 'o')    // molotov
-// 	        || (szWeapon[7] == 's' && szWeapon[8] == 'm')    // smokegren
-// 	        || (szWeapon[7] == 't' && szWeapon[9] == 'g')    // tagrenade
-// 	);
-// }
