@@ -27,6 +27,12 @@ stock GrenadeType GetGrenadeTypeByClassName(const char[] szClassName)
     return GrenadeType_Unkown;
 }
 
+stock void SetEntityColor(int iEntity, const int iColor[4])
+{
+    SetEntityRenderMode(iEntity, (iColor[3] == 255) ? RENDER_GLOW : RENDER_TRANSCOLOR);
+    SetEntityRenderColor(iEntity, iColor[0], iColor[1], iColor[2], iColor[3]);
+}
+
 stock char IntToStr(int iInt)
 {
 	decl char s[32];

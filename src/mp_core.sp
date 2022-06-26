@@ -35,6 +35,15 @@ public void OnPluginStart()
 	Core.cvRandomGrenadeTrajectoryColors = CreateConVar("sm_practice_random_grenadecolors", "1", "Should grenade trails have random colors", FCVAR_PROTECTED);
 
 	RegConsoleCmd("sm_psettings", Command_Settings);
+
+	if (Core.bLateLoaded)
+	{
+		Core.bLateLoaded = false;
+
+		for (int i = 1; i <= MaxClients; i++)
+			if (IsClientInGame(i))
+				OnClientPutInServer(i);
+	}
 }
 
 public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLength)
@@ -45,6 +54,8 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 
 		return APLRes_SilentFailure;
 	}
+
+	Core.bLateLoaded = bLate;
 
 	Core.fOnCoreIsReady = new GlobalForward("MP_OnCoreIsReady", ET_Ignore);
 	Core.fPracticeStart = new GlobalForward("MP_OnPracticeStart", ET_Event);
@@ -57,6 +68,31 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 	Call_Finish();
 
 	return APLRes_Success;
+}
+
+public void OnMapStart()
+{
+	Core.OnMapInit();
+
+	if (Core.cvAutoStart.BoolValue)
+		Core.Start();
+}
+
+public void OnMapEnd()
+{
+	if (Core.bPracticeModeRunning && !Core.bPracticeModeRunning)
+		Core.Stop();
+}
+
+public void OnClientPutInServer(int iClient)
+{
+    if (!IsFakeClient(iClient))
+        g_EPlayer[iClient].Init(iClient);
+}
+
+public void OnClientDisconnect(int iClient)
+{
+	g_EPlayer[iClient].Clear();
 }
 
 public Action Command_Settings(int iClient, int iArgs)
@@ -118,29 +154,6 @@ public int Menu_SettingsHandler(Menu hMenu, MenuAction iAction, int iClient, int
 	return 0;
 }
 
-public void OnMapStart()
-{
-	if (Core.cvAutoStart.BoolValue)
-		Core.Start();
-}
-
-public void OnMapEnd()
-{
-	if (Core.bPracticeModeRunning && !Core.bPracticeModeRunning)
-		Core.Stop();
-}
-
-public void OnClientPutInServer(int iClient)
-{
-    if (!IsFakeClient(iClient))
-        g_EPlayer[iClient].Init(iClient);
-}
-
-public void OnClientDisconnect(int iClient)
-{
-	g_EPlayer[iClient].Clear();
-}
-
 public void OnEntityCreated(int iEntity, const char[] szClassName)
 {
 	if (!Core.bPracticeModeRunning)
@@ -196,6 +209,8 @@ void SDKHook_OnEntitySpawnPost(int iEntity)
 					iColors[2] = RandomInt(0, 255);
 					iColors[3] = 255;
 				}
+
+				SetEntityColor(iEntity, iColors);
 
 				iWidths = (Core.GrenadeThickness.FloatValue * 5);
 

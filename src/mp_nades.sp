@@ -11,6 +11,8 @@
 #pragma semicolon 1
 #pragma newdecls required
 
+bool g_bLateLoaded;
+
 enum struct ENade
 {
 	GrenadeType iType;
@@ -93,9 +95,9 @@ public void OnPluginStart()
 {
 	RegConsoleCmd("sm_flash", Command_Flash);
 
-	if (Core.bLateLoaded)
+	if (g_bLateLoaded)
 	{
-		Core.bLateLoaded = false;
+		g_bLateLoaded = false;
 
 		for (int i = 1; i <= MaxClients; i++)
 			if (IsClientInGame(i))
@@ -112,7 +114,7 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 		return APLRes_SilentFailure;
 	}
 
-	Core.bLateLoaded = bLate
+	g_bLateLoaded = bLate;
 
 	return APLRes_Success;
 }

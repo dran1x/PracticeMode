@@ -23,7 +23,7 @@ enum struct Global
     ConVar RespawnTerrorist;
     ConVar RespawnCounterTerrorist;
 
-    ConVar AllowNoclip;
+    // ConVar AllowNoclip;
 
     ConVar GrenadeTrajectory;
     ConVar GrenadeThickness;
@@ -45,8 +45,6 @@ enum struct Global
         this.ServerOS = view_as<OperatingSystem>(hGameData.GetOffset("Platform"));
         delete hGameData;
 
-        this.iBeamSprite = PrecacheModel("materials/sprites/laserbeam.vmt");
-
         this.IgnoreWinConditions = FindConVar("mp_ignore_round_win_conditions");
         this.RoundTime = FindConVar("mp_roundtime");
         this.RespawnTerrorist = FindConVar("mp_respawn_on_death_t");
@@ -57,6 +55,11 @@ enum struct Global
         this.GrenadeThickness = FindConVar("sv_grenade_trajectory_thickness");
         this.GrenadeSpecTime = FindConVar("sv_grenade_trajectory_time_spectator");
         this.GrenadeTime = FindConVar("sv_grenade_trajectory_time");
+    }
+
+    void OnMapInit()
+    {
+        this.iBeamSprite = PrecacheModel("materials/sprites/laserbeam.vmt");
     }
 
     bool Start()
