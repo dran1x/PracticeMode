@@ -8,6 +8,7 @@ enum OperatingSystem
 
 enum struct Global
 {
+    bool bLateLoaded;
     OperatingSystem ServerOS;
 
     bool bPracticeModeRunning;

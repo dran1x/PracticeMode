@@ -51,7 +51,7 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 	Core.fPracticeStart = new GlobalForward("MP_OnPracticeStop", ET_Ignore);
 	Core.fOnPlayerThrowProjectile = new GlobalForward("MP_OnPlayerThrowProjectile", ET_Ignore, Param_Cell, Param_Cell);
 
-	RegPluginLibrary("MP Core");
+	RegPluginLibrary(TAG_PLUG ... "Core");
 
 	Call_StartForward(Core.fOnCoreIsReady);
 	Call_Finish();
@@ -63,7 +63,7 @@ public Action Command_Settings(int iClient, int iArgs)
 {
 	if (iClient <= 0)
 		return Plugin_Handled;
-	
+
 	DisplaySettingsMenu(iClient);
 	return Plugin_Handled;
 }

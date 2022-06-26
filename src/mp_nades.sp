@@ -75,7 +75,7 @@ enum struct EPlayer
 			this.iLastFlashIndex = this.iNadeIndex[GrenadeType_Flash];
 
 			this.AMFlashes.SetArray(this.iLastFlashIndex, hNade, sizeof(hNade));
-	    }
+		}
 	}
 }
 
@@ -92,6 +92,15 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	RegConsoleCmd("sm_flash", Command_Flash);
+
+	if (Core.bLateLoaded)
+	{
+		Core.bLateLoaded = false;
+
+		for (int i = 1; i <= MaxClients; i++)
+			if (IsClientInGame(i))
+				OnClientPutInServer(i);
+	}
 }
 
 public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLength)
@@ -103,12 +112,7 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 		return APLRes_SilentFailure;
 	}
 
-	if (bLate)
-	{
-		for (int i = 1; i <= MaxClients; i++)
-			if (IsClientConnected(i))
-				OnClientPutInServer(i);
-	}
+	Core.bLateLoaded = bLate
 
 	return APLRes_Success;
 }
