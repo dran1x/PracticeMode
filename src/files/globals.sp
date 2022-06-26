@@ -102,18 +102,12 @@ enum struct Global
 
 Global Core;
 
-enum UserSetting
-{
-    UserSetting_DrawGrenadeTrajectories,
-    UserSetting_RestrictMobilityNade,
-    UserSetting_Total
-}
-
 enum struct EPlayer
 {
     int iUserID;
     int iClient;
     int iSettings[UserSetting_Total];
+    bool bInitialized;
 
     void Clear()
     {
@@ -123,12 +117,14 @@ enum struct EPlayer
             this.iSettings[i] = 0;
 
         this.iClient = -1;
+        this.bInitialized = false;
     }
 
     void Init(int iClient)
     {
         this.iUserID = GetSteamAccountID(iClient);
         this.iClient = iClient;
+        this.bInitialized = true;
     }
 }
 

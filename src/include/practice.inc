@@ -9,6 +9,14 @@
 #define TAG_MENU "Practice | "
 #define TAG_PLUG "[MP] "
 
+enum UserSetting
+{
+    UserSetting_None,
+    UserSetting_DrawGrenadeTrajectories,
+    UserSetting_RestrictMobilityNade,
+    UserSetting_Total
+}
+
 enum GrenadeType
 {
     GrenadeType_Unkown,
@@ -21,16 +29,13 @@ enum GrenadeType
     GrenadeType_Total
 }
 
-stock const char szGrenadeTypes[][] =
-{
-    "Unkown",
-    "Smoke",
-    "Flashbang",
-    "HE",
-    "Molotov",
-    "Decoy",
-    "Incendiary"
-};
+/**
+ *
+ * @param iUserID	    Client userid that threw the nade.
+ * @param NadeType		Type of nade entity.
+ *
+ */
+native UserSetting MP_GetClientPracticeSetting(int iUserID, UserSetting iSetting)
 
 /**
  * Called when practice core is fully functional.
@@ -62,6 +67,31 @@ forward void MP_OnPracticeStop();
  *
  */
 forward void MP_OnPlayerThrowProjectile(int iUserID, GrenadeType NadeType);
+
+stock GrenadeType GetGrenadeTypeByClassName(const char[] szClassName)
+{
+    switch (szClassName[2])
+    {
+        case 'o':   return GrenadeType_Smoke;
+        case 'a':   return GrenadeType_Flash;
+        case 'g':   return GrenadeType_HE;
+        case 'l':   return GrenadeType_Molotov;
+        case 'c':   return (szClassName[0] == 'i') ? GrenadeType_Incendiary : GrenadeType_Decoy;
+    }
+
+    return GrenadeType_Unkown;
+}
+
+stock const char szGrenadeTypes[][] =
+{
+    "Unkown",
+    "Smoke",
+    "Flashbang",
+    "HE",
+    "Molotov",
+    "Decoy",
+    "Incendiary"
+};
 
 public SharedPlugin __pl_practice =
 {

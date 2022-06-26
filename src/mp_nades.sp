@@ -69,14 +69,14 @@ enum struct EPlayer
 
 		if (NadeType == GrenadeType_Flash)
 		{
-			ENade hNade;
+			ENade iNade;
 
-			hNade.fEyeAngles       = this.fEyeAngles;
-			hNade.fAbsOriginAngles = this.fAbsOriginAngles;
+			iNade.fEyeAngles       = this.fEyeAngles;
+			iNade.fAbsOriginAngles = this.fAbsOriginAngles;
 
 			this.iLastFlashIndex = this.iNadeIndex[GrenadeType_Flash];
 
-			this.AMFlashes.SetArray(this.iLastFlashIndex, hNade, sizeof(hNade));
+			this.AMFlashes.SetArray(this.iLastFlashIndex, iNade, sizeof(iNade));
 		}
 	}
 }
@@ -161,11 +161,11 @@ public Action Timer_FlashTeleport(Handle hTimer, int iUserID)
 	if (iClient <= 0 && !IsClientInGame(iClient) || !IsPlayerAlive(iClient))
 		return Plugin_Stop;
 
-	ENade hNade;
+	ENade iNade;
 
-	g_EPlayer[iClient].AMFlashes.GetArray(g_EPlayer[iClient].iLastFlashIndex, hNade, sizeof(hNade));
+	g_EPlayer[iClient].AMFlashes.GetArray(g_EPlayer[iClient].iLastFlashIndex, iNade, sizeof(iNade));
 
-	TeleportEntity(iClient, hNade.fAbsOriginAngles, hNade.fEyeAngles, NULL_VECTOR);
+	TeleportEntity(iClient, iNade.fAbsOriginAngles, iNade.fEyeAngles, NULL_VECTOR);
 
 	SetEntityMoveType(iClient, MOVETYPE_NONE);
 

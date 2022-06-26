@@ -15,6 +15,7 @@
 
 #include <files/globals.sp>
 #include <files/stocks.sp>
+#include <files/natives.sp>
 
 public Plugin myinfo =
 {
@@ -56,6 +57,9 @@ public APLRes AskPluginLoad2(Handle hSelf, bool bLate, char[] szError, int iLeng
 	}
 
 	Core.bLateLoaded = bLate;
+
+	CreateNative("MP_GetPracticeSetting", Native_GetPracticeSetting);
+	CreateNative("MP_GetClientPracticeSetting", Native_GetClientPracticeSetting);
 
 	Core.fOnCoreIsReady = new GlobalForward("MP_OnCoreIsReady", ET_Ignore);
 	Core.fPracticeStart = new GlobalForward("MP_OnPracticeStart", ET_Event);
