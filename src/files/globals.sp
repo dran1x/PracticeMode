@@ -36,7 +36,7 @@ enum struct Global
 
     void Initiate()
     {
-        GameData hGameData = new GameData("mypractice.game.csgo");
+        GameData hGameData = new GameData("practice.game.csgo");
         this.ServerOS = view_as<OperatingSystem>(hGameData.GetOffset("Platform"));
         delete hGameData;
 

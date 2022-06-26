@@ -1,6 +1,6 @@
 #include <sourcemod>
 #include <sdktools_functions>
-#include <mypractice>
+#include <practice>
 #include <anymap>
 
 #if !defined RSVP_COMPILER

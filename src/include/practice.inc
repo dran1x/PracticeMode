@@ -1,7 +1,7 @@
-#if defined _mypractice_included_
+#if defined _practice_included_
     #endinput
 #endif
-#define _mypractice_included_
+#define _practice_included_
 
 #define TAG_CHAT "[\x06Practice\x01]"
 #define TAG_CONSOLE "[{GREEN}Practice{DEFAULT}]"
@@ -62,9 +62,9 @@ forward void MP_OnPracticeStop();
  */
 forward void MP_OnPlayerThrowProjectile(int iUserID, GrenadeType NadeType);
 
-public SharedPlugin __pl_mypractice =
+public SharedPlugin __pl_practice =
 {
-	name = "MP Core",
+	name = TAG_PLUG ... "Core",
 	file = "mp_core.smx",
 #if defined REQUIRE_PLUGIN
 	required = 1,

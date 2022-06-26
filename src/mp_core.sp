@@ -3,7 +3,7 @@
 #include <sdkhooks>
 #include <sdktools>
 #include <sourcemod>
-#include <mypractice>
+#include <practice>
 
 #if !defined RSVP_COMPILER
 	#define decl static

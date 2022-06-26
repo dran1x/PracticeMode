@@ -12,7 +12,7 @@ stock int RandomInt(int iMin, int iMax)
 {
 	return RoundToZero(GetURandomFloat() * (iMax - iMin + 1) + iMin);
 }
-// flashbang_projectile
+
 stock GrenadeType GetGrenadeTypeByClassName(const char[] szClassName)
 {
     switch (szClassName[2])

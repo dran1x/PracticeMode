@@ -1,5 +1,3 @@
-#include <sourcemod>
-
 #if !defined RSVP_COMPILER
 	#define decl static
 #endif
