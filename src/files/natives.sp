@@ -15,3 +15,8 @@ public UserSetting Native_GetClientPracticeSetting(Handle hPlugin, int iParams)
 
     return view_as<UserSetting>(g_EPlayer[iClient].iSettings[iSetting]);
 }
+
+public bool Native_RegisterNative(Handle hPlugin, int iParams)
+{
+    
+}

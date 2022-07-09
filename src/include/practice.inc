@@ -9,6 +9,13 @@
 #define TAG_MENU "Practice | "
 #define TAG_PLUG "[MP] "
 
+#define MAX_PLUGIN_NAME_LENTGH		32
+#define MAX_DESCRIPTION_LENGTH		128
+#define MAX_AUTHOR_LENGTH			64
+#define MAX_PLUGIN_FILEPATH_LENGTH	(MAX_PLUGIN_NAME_LENTGH * 2)
+
+#define GITHUB_REPOSITORY_LENGTH	100
+
 enum UserSetting
 {
     UserSetting_None,
@@ -30,12 +37,11 @@ enum GrenadeType
 }
 
 /**
- *
  * @param iUserID	    Client userid that threw the nade.
  * @param NadeType		Type of nade entity.
  *
  */
-native UserSetting MP_GetClientPracticeSetting(int iUserID, UserSetting iSetting)
+native UserSetting MP_GetClientPracticeSetting(int iUserID, UserSetting iSetting);
 
 /**
  * Called when practice core is fully functional.
@@ -67,10 +73,10 @@ forward void MP_OnPracticeStop();
  *
  */
 forward void MP_OnPlayerThrowProjectile(int iUserID, GrenadeType NadeType);
-
+// 
 stock GrenadeType GetGrenadeTypeByClassName(const char[] szClassName)
 {
-    switch (szClassName[2])
+    switch (szClassName[(2 + 7)])
     {
         case 'o':   return GrenadeType_Smoke;
         case 'a':   return GrenadeType_Flash;

@@ -16,13 +16,13 @@
     }
 
     // UserSetting_DrawGrenadeTrajectories
-    "User Setting[0]"
+    "User Setting[1]"
     {
         "en"                "Trajectory Trails"
     }
 
     // UserSetting_RestrictMobilityNade
-    "User Setting[1]"
+    "User Setting[2]"
     {
         "en"                "Restrict Mobility Nade"
     }
